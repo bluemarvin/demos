@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Mites Web Edition</title>
+<link type="text/css" href="css/smoothness/jquery-ui-1.7.1.custom.css" rel="stylesheet" />
+<style>
+div.controls {
+   width:300px;
+   position:absolute;
+   left:645px;
+   top:440px;
+}
+
+div.canvas {
+   position:absolute;
+   left:10px;
+   top:10px;
+   border-style:solid;
+   border-color:black;
+   border-width:5;
+}
+
+img.splash {
+   position:absolute;
+   left:645px;
+   top:10px;
+}
+</style>
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.7.1.custom.min.js"></script>
+<!--[if IE]><script type="text/javascript" src="js/excanvas.js"></script><![endif]-->
+<script type="text/javascript" src="js/mites.js"></script>
+<script type="text/javascript">
+   $(function () {
+      $("#miteCountSlider").slider ({
+         animate: true,
+         max: 50,
+         value: 20,
+         slide: function (event, ui) { updateMiteCount (ui.value) },
+         change: function (event, ui) { updateMiteCount (ui.value) },
+      });
+      $("#chipCountSlider").slider ({
+         animate: true,
+         max: 200,
+         value: 50,
+         slide: function (event, ui) { updateChipCount (ui.value) },
+         change: function (event, ui) { updateChipCount (ui.value) },
+      });
+   })
+
+   function resetSim () {
+
+      $("#miteCountSlider").slider ("value", 20)
+      $("#chipCountSlider").slider ("value", 50)
+      initSim ()
+   }
+</script>
+</head>
+<body>
+<div class="canvas">
+<canvas id="mites" width="600" height="600"></canvas>
+</div> <!-- class="canvas" -->
+<div class="controls">
+<fieldset>
+<legend>Controls</legend>
+mites [<span id="miteCount">20</span>]:
+<div id="miteCountSlider"></div>
+<br>
+chips [<span id="chipCount">20</span>]:
+<div id="chipCountSlider"></div>
+<br>
+<button onclick="resetSim ()">Reset</button>
+<button id="pauseButton" onclick="toggleSimRunState ()">Pause</button>
+</fieldset>
+</div><!-- class="controls" -->
+<img class="splash" src="assets/splash.png"></img>
+</body>
+</html>
